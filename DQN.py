@@ -44,7 +44,7 @@ class DeepQNetwork():
         self.model = BPNetWork(input_size, output_size)
         self.memory = ExperienceReplay(100000)
         self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
-        self.last_data = torch.Tensor(np.zeros(10)).unsqueeze(0)
+        self.last_data = torch.Tensor(np.zeros(15)).unsqueeze(0)
         self.last_action = 0
         self.last_reward = 0
 
