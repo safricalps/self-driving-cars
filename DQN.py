@@ -49,8 +49,9 @@ class DeepQNetwork():
         self.last_reward = 0
 
     def select_action(self, environment_data):
-        probs = fun.softmax(self.model(Variable(environment_data, volatile=True)) * 100)
-        action = probs.multinomial()
+        probs = fun.softmax(self.model.forward(Variable(environment_data, volatile=True)) * 100)
+        # print(probs)
+        action = torch.multinomial(probs.squeeze(1),5,replacement=True)
         return action.data[0,0]
 
     def learn(self, data_one, data_second, reward, action, status):
