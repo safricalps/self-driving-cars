@@ -32,11 +32,9 @@ def dealFunc(data):
         enviroment_data.append(data['cars'][i]['speed'])
     status = data['status']
     if status == 1:
-        next_action = model.update(-1, enviroment_data, status)
+        return model.update(-1, enviroment_data, status)
     else:
-        next_action = model.update(0.1, enviroment_data, status)   
-    
-    return next_action
+        return model.update(0.1, enviroment_data, status)   
 
 if __name__ == '__main__':
     socketio.run(app, "127.0.0.1", debug=True)
