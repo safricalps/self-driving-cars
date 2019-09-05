@@ -62,7 +62,7 @@ class DeepQNetwork():
         #q_target[status == 1] = reward[status == 1]
         td_loss = fun.smooth_l1_loss(q_estimate, q_target)
         self.optimizer.zero_grad()
-        td_loss.backward(retain_variables=True)
+        td_loss.backward()
         self.optimizer.step()
 
     def update(self, reward, new_data, status):
