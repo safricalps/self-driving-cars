@@ -73,8 +73,8 @@ class DeepQNetwork():
                         torch.LongTensor([int(self.last_action)]), torch.LongTensor([int(status)])))
         
         if len(self.memory.memory) > 100:
-            data_one, data_second, reward, action = self.memory.sample(100)
-            self.learn(data_one, data_second, reward, action)
+            data_one, data_second, reward, action, status = self.memory.sample(100)
+            self.learn(data_one, data_second, reward, action, status)
             
         self.last_action = action
         self.last_data = new_data
