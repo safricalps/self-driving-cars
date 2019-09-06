@@ -79,7 +79,7 @@ class DeepQNetwork():
             data_one, data_second, reward, action, status = self.memory.sample(100)
             self.learn(data_one, data_second, reward, action, status)
             
-        self.last_action = action
+        self.last_action = action.item()
         self.last_data = new_data
         #self.last_reward = reward
         #self.reward_average.append(reward)
