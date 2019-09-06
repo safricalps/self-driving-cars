@@ -72,12 +72,12 @@ class DeepQNetwork():
     def update(self, reward, new_data, status):
         new_data = torch.Tensor(new_data).float().unsqueeze(0)
         action = self.select_action(new_data)
-
+        
         self.memory.push((self.last_data, new_data, torch.Tensor([reward]), torch.LongTensor([int(self.last_action)]), torch.Tensor([status])))
         
         if len(self.memory.memory) > 100:
-            data_one, data_second, reward, action, status = self.memory.sample(100)
-            self.learn(data_one, data_second, reward, action, status)
+            data_one, data_second, reward_set, action_set, status_set = self.memory.sample(100)
+            self.learn(data_one, data_second, reward_set, action_set, status_set)
             
         self.last_action = action.item()
         self.last_data = new_data
