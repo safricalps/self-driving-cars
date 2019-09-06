@@ -53,6 +53,7 @@ class DeepQNetwork():
         # print(probs)
         action = torch.multinomial(probs.squeeze(1),5,replacement=True)
         rand = random.random()
+        print(action.data)
         if rand > 0.7:
             return action.data[0,0]
         else
