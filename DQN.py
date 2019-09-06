@@ -56,7 +56,7 @@ class DeepQNetwork():
         if rand > 0.7:
             return action.data[0,0]
         else:
-            return random.randint(0,4)
+            return torch.Tensor([random.randint(0,4)])
 
     def learn(self, data_one, data_second, reward, action, status):
         q_estimate = self.model.forward(data_one).gather(1, action.unsqueeze(1)).squeeze(1)
@@ -79,13 +79,13 @@ class DeepQNetwork():
             data_one, data_second, reward_set, action_set, status_set = self.memory.sample(100)
             self.learn(data_one, data_second, reward_set, action_set, status_set)
             
-        self.last_action = action
+        self.last_action = int(action.item())
         self.last_data = new_data
         #self.last_reward = reward
         #self.reward_average.append(reward)
         #if len(self.reward_average) > 1000:
             #del self.reward_average[0]
-        return action
+        return self.last_action
 
     #def score(self):
         #return sum(self.reward_average) / (len(self.reward_average) + 1.)

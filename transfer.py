@@ -17,7 +17,7 @@ def hello_world():
 def UpdateJsonHandler(data):
 
     data = dealFunc(data['data'])
-    data = json.dumps(data.item())
+    data = json.dumps(data)
     print(type(data))
     # update为前端定义的接受json的事件名
     emit("update", data)
@@ -31,6 +31,7 @@ def dealFunc(data):
         enviroment_data.append(data['cars'][i]['y'])
         enviroment_data.append(data['cars'][i]['speed'])
     status = data['status']
+    #lane = data['lane']
     if status == 1:
         return model.update(-1, enviroment_data, status)
     else:
