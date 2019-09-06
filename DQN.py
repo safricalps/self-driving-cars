@@ -53,11 +53,10 @@ class DeepQNetwork():
         # print(probs)
         action = torch.multinomial(probs.squeeze(1),5,replacement=True)
         rand = random.random()
-        print(action.data)
         if rand > 0.7:
             return action.data[0,0]
-        else
-            return action.data[random.randint(0,4),0]
+        else:
+            return random.randint(0,4)
 
     def learn(self, data_one, data_second, reward, action, status):
         q_estimate = self.model.forward(data_one).gather(1, action.unsqueeze(1)).squeeze(1)
